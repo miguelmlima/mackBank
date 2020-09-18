@@ -8,7 +8,7 @@ import java.lang.RuntimeException
 abstract class Conta(
     val titular: Cliente,
     val numero: Int
-) : Autenticavel  by titular{
+) : Autenticavel by titular {
     var saldo = 0.0
         protected set
 
@@ -19,12 +19,11 @@ abstract class Conta(
     }
 
     init {
-        println("Criando conta")
         total++
     }
 
     override fun autentica(senha: Int): Boolean {
-        return  titular.autentica(senha)
+        return titular.autentica(senha)
     }
 
     fun deposita(valor: Double) {
@@ -38,9 +37,10 @@ abstract class Conta(
     fun transfere(valor: Double, destino: Conta, senha: Int) {
         if (saldo < valor) {
             throw SaldoInsuficienteException(
-                mensagem = "O saldo insuficiente, saldo atual: $saldo, valor a ser subtraído $valor")
+                mensagem = "O saldo insuficiente, saldo atual: $saldo, valor a ser subtraído $valor"
+            )
         }
-        if(!autentica(senha)){
+        if (!autentica(senha)) {
             throw FalhaAutenticacaoExceotion()
         }
 //        throw RuntimeException()
